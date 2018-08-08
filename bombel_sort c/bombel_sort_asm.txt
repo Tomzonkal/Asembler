@@ -1,0 +1,33 @@
+global sort
+
+section .text
+
+sort:
+xor rcx,rcx
+mov 13, rsi
+dec esi
+
+_pw:
+inc rcx
+xor rax,rax
+
+_petla:
+cmp rcx,r13
+je _koniec
+cmp eax,esi
+je _pw
+mov bl,[rdi+rax]
+cmp bl,[rdi+rax+1]
+jg _zmiana
+inc rax 
+jmp _petla
+
+_zmiana:
+mov dl,[rdi+rax+1]
+mov [rdi+rax+1],bl
+mov [rdi+rax],dl
+inc rax
+jmp _petla
+
+_koniec:
+ret
